@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Leaderboard"
+            android:icon="@drawable/lb"
+            android:title="LeaderBoard" />
+        <item
+            android:id="@+id/TeamId"
+            android:icon="@drawable/team"
+            android:title="View Team(s)" />
+        <item
+            android:id="@+id/TeamUpdate"
+            android:icon="@drawable/update1"
+            android:title="Update Team" />
+        <item
+            android:id="@+id/Private"
+            android:icon="@drawable/key"
+            android:title="Private League" />
+        <item
+            android:id="@+id/AboutId"
+            android:icon="@drawable/ab"
+            android:title="About" />
+    </group>
+
+    <item android:title="Make Us Famous, Shaabaash!" >
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/like"
+                android:title="Ratings" />
+        </menu>
+    </item>
+
+</menu>

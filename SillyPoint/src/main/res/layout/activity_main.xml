@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:weightSum="1"
+        android:background="@drawable/crowd">
+
+        <ImageView
+            android:src="@drawable/sp4"
+            android:layout_width="255dp"
+            android:layout_height="146dp"
+            android:id="@+id/imageView2"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.24" />
+
+        <EditText android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress|textAutoComplete|textPersonName|textAutoCorrect|text"
+            android:hint="Enter Your Name, Star!"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:foreground="#ffffff"
+            android:layout_marginBottom="12dp"
+            android:background="@color/colorAccent" />
+
+        <EditText android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Enter Password"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:background="@color/colorAccent" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Login"
+            android:background="@color/colorPrimary"
+            android:textColor="#fbf8f8"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:typeface="normal"
+            android:visibility="visible"
+            android:textColorHighlight="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:foregroundGravity="center"
+            android:foreground="@color/White"
+            />
+
+    <TextView android:id="@+id/Or"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:text="Or "
+        android:gravity="center"
+        android:textSize="16dip"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView android:id="@+id/SocialMedia"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:text="Sign-in with other account! "
+        android:gravity="center"
+        android:textSize="16dip"
+        android:textColor="@color/colorPrimary" />
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="20dp"
+        android:weightSum="1"
+        android:gravity="fill_horizontal|right"
+        android:background="@color/colorAccent">
+
+        <ImageView
+            android:src="@drawable/fbicon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView5"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.10" />
+
+        <ImageView
+            android:src="@drawable/twitter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView6"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="0.10" />
+
+</LinearLayout>
+
+    <TextView android:id="@+id/link_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Don't Have an Account? Sign-up!"
+            android:gravity="center"
+            android:textSize="16dip"
+            android:textColor="@color/colorPrimary"
+        android:onClick="SecondPage"/>
+
+
+    </LinearLayout>
+
