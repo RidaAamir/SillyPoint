@@ -32,6 +32,7 @@ public class TeamPlayers extends AppCompatActivity {
     Player p= new Player();
     Player[] squad_team1 = new Player[40];
     Player[] squad_team2 = new Player[40];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

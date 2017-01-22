@@ -7,17 +7,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class Team extends AppCompatActivity {
     ImageView Allrounder;
     ImageView Batsmen;
     ImageView Bowlers;
     ImageView Wicketkeepers;
+
+    String UserName = "";
+
+    ListView listview = null;
+    ListView listview1 = null;
+    ListView listview2= null;
+    ListView listview3 = null;
+
+    ArrayList<String> SelectedBowlers = new ArrayList<>();
+    ArrayList<String> SelectedBowlers1 = new ArrayList<>();
+    ArrayList<String> SelectedBowlers2 = new ArrayList<>();
+    ArrayList<String> SelectedBowlers3 = new ArrayList<>();
     EditText input;
     EditText input1;
     EditText input2;
@@ -32,53 +49,200 @@ public class Team extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team);
+
+
+
         txtTemp =(TextView) findViewById(R.id.teamnames);
         Allrounder = (ImageView) findViewById(R.id.allrounder);
         Batsmen = (ImageView) findViewById(R.id.batsmen);
         Bowlers = (ImageView) findViewById(R.id.bowlers);
         Wicketkeepers = (ImageView) findViewById(R.id.wicketkeeper);
-
+            /*
+            * intent.putExtra("TeamName",TeamName);
+            intent.putStringArrayListExtra("Bowlers", OnlyBowlers);
+            intent.putStringArrayListExtra("Batman", OnlyBatsman);
+            intent.putStringArrayListExtra("Allrounders", OnlyAlrounder);
+            intent.putStringArrayListExtra("Wicketkeeper", OnlyWicketKeeper);
+            * */
 
         Intent intent = getIntent();
+        TextView ab = (TextView)findViewById(R.id.UserName);
 
-        String strTemp = intent.getStringExtra("Teams");
-        txtTemp.setText(strTemp);
+        UserName = getIntent().getStringExtra("User");
+        ab.setText(UserName);
+        String TeamName = getIntent().getStringExtra("TeamName");
+        ArrayList <String> BowlersA = getIntent().getStringArrayListExtra("Bowlers");
+        ArrayList <String> BatsmanA = getIntent().getStringArrayListExtra("Batman");
+        ArrayList <String> AllRoundersA = getIntent().getStringArrayListExtra("Allrounders");
+        ArrayList <String> WicketkeeperA = getIntent().getStringArrayListExtra("Wicketkeeper");
+        txtTemp.setText(TeamName);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Set Formation");
-        builder.setMessage("What Formation do you want?");
+        builder.setTitle("All-Rounders");
+        builder.setMessage("Your Batsmen: ");
 
+        listview = new ListView(this);
         input = new EditText(this);
-        builder.setView(input);
+       // builder.setView(listview);
 
+
+
+
+        String []data = new String[AllRoundersA.size()]; //= {"Dwayne Bravo   Alrounder","J. Charles   Alrounder","Chris Gayle   Alrounder","Shahid Afridi   Alrounder"};
+        for (int i = 0;i<AllRoundersA.size();i++)
+        {
+            data[i] = AllRoundersA.get(i).toString();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.blayout,data);
+        listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedbowler = ((TextView)view).getText().toString();
+
+                if (SelectedBowlers.contains(selectedbowler))
+                {
+                    SelectedBowlers.remove(selectedbowler);
+                }
+                else
+                {
+                    listview.setItemChecked(position,true);
+                    SelectedBowlers.add(selectedbowler);
+                }
+            }
+        });
+        //input = new EditText(this);
+        builder.setView(listview);
 
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setTitle("Set Formation");
-        builder1.setMessage("What Formation do you want?");
+        builder1.setTitle("Batsmen");
+        builder1.setMessage("Your Batsmen: ");
 
+        listview1 = new ListView(this);
         input1 = new EditText(this);
-        builder1.setView(input1);
+
+
+        String []data1 = new String[BatsmanA.size()];//= {"Darren Bravo   Batsman","Misbah-Ul-Haq   Batsman","Umar Akmal   Batsman","M. Rizwan   Batsman"};
+
+        for (int i = 0;i<BatsmanA.size();i++)
+        {
+            data1[i] = BatsmanA.get(i).toString();
+        }
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, R.layout.blayout,data1);
+        listview1.setAdapter(adapter1);
+        listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedbowler1 = ((TextView)view).getText().toString();
+
+                if (SelectedBowlers1.contains(selectedbowler1))
+                {
+                    SelectedBowlers1.remove(selectedbowler1);
+                }
+                else
+                {
+                    listview1.setItemChecked(position,true);
+                    SelectedBowlers1.add(selectedbowler1);
+                }
+            }
+        });
+        builder1.setView(listview1);
 
         AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-        builder2.setTitle("Set Formation");
-        builder2.setMessage("What Formation do you want?");
+        builder2.setTitle("Bowlers");
+        builder2.setMessage("Your Bowlers: ");
 
+        listview2 = new ListView(this);
         input2 = new EditText(this);
-        builder2.setView(input2);
+
+
+
+         /*
+        * ArrayList <String> BowlersA = getIntent().getStringArrayListExtra("Bowlers");
+        ArrayList <String> BatsmanA = getIntent().getStringArrayListExtra("Batman");
+        ArrayList <String> AllRoundersA = getIntent().getStringArrayListExtra("Allrounders");
+        ArrayList <String> WicketkeeperA = getIntent().getStringArrayListExtra("Wicketkeeper");
+        *
+        * */
+        String []data2 = new String[BowlersA.size()]; //= {"Abdul Rehman  Bowler","Kema Roach  Bowler","J. Holder  Bowler","Best  Bowler"};
+
+        for (int i = 0;i< BowlersA.size();i++)
+        {
+            data2[i] = BowlersA.get(i).toString();
+        }
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.blayout,data2);
+        listview2.setAdapter(adapter2);
+        listview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedbowler2 = ((TextView)view).getText().toString();
+
+                if (SelectedBowlers2.contains(selectedbowler2))
+                {
+                    SelectedBowlers2.remove(selectedbowler2);
+                }
+                else
+                {
+                    listview2.setItemChecked(position,true);
+                    SelectedBowlers2.add(selectedbowler2);
+                }
+            }
+        });
+
+
+
+        builder2.setView(listview2);
 
         AlertDialog.Builder builder3 = new AlertDialog.Builder(this);
-        builder3.setTitle("Set Formation");
-        builder3.setMessage("What Formation do you want?");
+        builder3.setTitle("Wicket Keepers");
+        builder3.setMessage("Your WicketKeepers: ");
 
+        listview3 = new ListView(this);
         input3 = new EditText(this);
-        builder3.setView(input3);
+
+         /*
+        * ArrayList <String> BowlersA = getIntent().getStringArrayListExtra("Bowlers");
+        ArrayList <String> BatsmanA = getIntent().getStringArrayListExtra("Batman");
+        ArrayList <String> AllRoundersA = getIntent().getStringArrayListExtra("Allrounders");
+        ArrayList <String> WicketkeeperA = getIntent().getStringArrayListExtra("Wicketkeeper");
+        *
+        * */
+        String []data3 = new String[WicketkeeperA.size()];//= {"Umar Akmal  WicketKeeper","M. Rizwan  WicketKeeper","Dinesh Ramdin  WicketKeeper"};
+
+        for (int i=0;i<WicketkeeperA.size();i++)
+        {
+            data3[i] = WicketkeeperA.get(i).toString();
+        }
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, R.layout.blayout,data3);
+        listview3.setAdapter(adapter3);
+        listview3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedbowler3 = ((TextView)view).getText().toString();
+
+                if (SelectedBowlers3.contains(selectedbowler3))
+                {
+                    SelectedBowlers3.remove(selectedbowler3);
+                }
+                else
+                {
+                    listview3.setItemChecked(position,true);
+                    SelectedBowlers3.add(selectedbowler3);
+                }
+            }
+        });
+
+
+        builder3.setView(listview3);
 
         //For First Builder
         builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                android.widget.Toast.makeText(getBaseContext(), "You selected this formation: " + input.getText().toString(), android.widget.Toast.LENGTH_LONG).show();
-                a = Integer.parseInt(input.getText().toString());
+                android.widget.Toast.makeText(getBaseContext(), "You selected this formation: " + SelectedBowlers.size(), android.widget.Toast.LENGTH_LONG).show();
+               // a = Integer.parseInt(input.getText().toString());
+                a = SelectedBowlers.size();
             }
         });
 
@@ -95,8 +259,9 @@ public class Team extends AppCompatActivity {
         builder1.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                android.widget.Toast.makeText(getBaseContext(), "You selected this formation: " + input1.getText().toString(), android.widget.Toast.LENGTH_LONG).show();
-                b = Integer.parseInt(input1.getText().toString());
+                android.widget.Toast.makeText(getBaseContext(), "You selected this formation: " + SelectedBowlers1.size(), android.widget.Toast.LENGTH_LONG).show();
+                //b = Integer.parseInt(input1.getText().toString());
+                b = SelectedBowlers1.size();
             }
         });
 
@@ -114,8 +279,9 @@ public class Team extends AppCompatActivity {
         builder2.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                android.widget.Toast.makeText(getBaseContext(), "You selected this formation: " + input2.getText().toString(), android.widget.Toast.LENGTH_LONG).show();
-                c = Integer.parseInt(input2.getText().toString());
+                android.widget.Toast.makeText(getBaseContext(), "You selected this formation: " + SelectedBowlers2.size(), android.widget.Toast.LENGTH_LONG).show();
+                //c = Integer.parseInt(input2.getText().toString());
+                c = SelectedBowlers2.size();
             }
         });
 
@@ -133,8 +299,9 @@ public class Team extends AppCompatActivity {
         builder3.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                android.widget.Toast.makeText(getBaseContext(), "You selected this formation: " + input3.getText().toString(), android.widget.Toast.LENGTH_LONG).show();
-                d = Integer.parseInt(input3.getText().toString());
+                android.widget.Toast.makeText(getBaseContext(), "You selected this formation: " + SelectedBowlers3.size(), android.widget.Toast.LENGTH_LONG).show();
+                //d = Integer.parseInt(input3.getText().toString());
+                d = SelectedBowlers3.size();
             }
         });
 

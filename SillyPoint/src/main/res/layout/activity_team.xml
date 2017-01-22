@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.emad.splashscreen.Team"
-    android:background="@drawable/dressingroom">
+    android:background="@drawable/lords1attempt">
 
 
     <TextView
@@ -22,7 +22,24 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textAlignment="center"
-        android:layout_marginLeft="-15dp"
+        android:layout_marginLeft="-25dp"
+        android:background="@color/colorAccent"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:maxLines="2" />
+
+    <TextView
+        android:layout_width="387dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="User"
+        android:id="@+id/UserName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center"
+        android:layout_marginLeft="-25dp"
         android:background="@color/colorAccent"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -113,16 +130,22 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Close The Wardrobe!"
+        android:text=" Take Me Back"
+        android:drawableLeft="@drawable/return1"
+        android:background="@color/colorPrimary"
+        android:textColor="#fbf8f8"
         android:id="@+id/back"
         android:onClick="GoBack" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/confirmteam"
             android:text="My Formation"
             android:id="@+id/forward"
-            android:layout_marginLeft="15dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#fbf8f8"
+            android:layout_marginLeft="10dp"
             android:onClick="GoForward"
             android:layout_weight="0.66" />
     </LinearLayout>>

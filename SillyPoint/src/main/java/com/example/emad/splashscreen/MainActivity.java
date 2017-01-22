@@ -17,6 +17,7 @@ public class MainActivity extends ActionBarActivity {
     MyDBHandler dbHandler;
     @BindView(R.id.input_email) android.widget.EditText _emailText;
     @BindView(R.id.input_password) android.widget.EditText _passwordText;
+    String email = "";
 
     @BindView(R.id.btn_login) android.support.v7.widget.AppCompatButton _loginButton;
     @Override
@@ -52,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
+        email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
@@ -85,12 +86,13 @@ public class MainActivity extends ActionBarActivity {
     public boolean validate()
     {
         boolean valid = true;
+        boolean ConnectedOrNot = UserConnectedtoInternetOrNot();
 
-        String email = _emailText.getText().toString();
+        email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
         boolean check = dbHandler.UserExists(email,password);
 
-        if (check)
+        if (check && ConnectedOrNot)
         {
             android.widget.Toast.makeText(getBaseContext(), "User Exists!", android.widget.Toast.LENGTH_LONG).show();
             valid = true;
@@ -105,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
             _emailText.setError("enter a valid Username");
             valid = false;
         }
-        else if (!email.isEmpty() && check)
+        else if (!email.isEmpty() && check && ConnectedOrNot)
         {
             _emailText.setError(null);
             valid = true;
@@ -115,28 +117,12 @@ public class MainActivity extends ActionBarActivity {
         {
             _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
-        } else if (!password.isEmpty() && check)
+        } else if (!password.isEmpty() && check && ConnectedOrNot)
         {
             _passwordText.setError(null);
             valid = true;
         }
-        ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (connec != null && (
-                (connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) ||
-                        (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED))) {
-
-            //You are connected, do something online.
-            valid = true;
-        } else if (connec != null && (
-                (connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.DISCONNECTED) ||
-                        (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.DISCONNECTED ))) {
-
-            //Not connected.
-            valid = false;
-            android.widget.Toast.makeText(getBaseContext(), "No Internet Connection!", android.widget.Toast.LENGTH_LONG).show();
-
-        }
 
             return valid;
 
@@ -150,9 +136,33 @@ public class MainActivity extends ActionBarActivity {
         finish();
     }
 
+    public boolean UserConnectedtoInternetOrNot()
+    {
+        ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connec != null && (
+                (connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) ||
+                        (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED))) {
+
+            //You are connected, do something online.
+            return true;
+        } else if (connec != null && (
+                (connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.DISCONNECTED) ||
+                        (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.DISCONNECTED ))) {
+
+            //Not connected.
+            android.widget.Toast.makeText(getBaseContext(), "No Internet Connection! Check Connection!", android.widget.Toast.LENGTH_LONG).show();
+            return false;
+
+        }
+        return false;
+    }
+
     public void WelcomePage()
     {
         Intent intent = new Intent(this, WelcomeMenu.class);
+
+        intent.putExtra("User",email);
         startActivity(intent);
         finish();
     }

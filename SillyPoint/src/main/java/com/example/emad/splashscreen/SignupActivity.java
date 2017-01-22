@@ -2,6 +2,8 @@ package com.example.emad.splashscreen;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,8 @@ public class SignupActivity extends AppCompatActivity {
     EditText emadspassword;
     EditText emadsrepassword;
     MyDBHandler dbhandler;
+
+    String UserName = "";
 
     @BindView(R.id.btn_signup) android.support.v7.widget.AppCompatButton _signupButton;
     @Override
@@ -43,6 +47,7 @@ public class SignupActivity extends AppCompatActivity {
 
     public void userCreated(View v)
     {
+        boolean CheckConnectivity = UserConnectedtoInternetOrNot();
 
             if (emadspassword.getText().toString().isEmpty())
             {
@@ -54,9 +59,9 @@ public class SignupActivity extends AppCompatActivity {
         }
 
 
-        if (emadspassword.getText().toString().equals(emadsrepassword.getText().toString()) && !emadsemail.getText().toString().isEmpty() && !emadsusername.getText().toString().isEmpty() ) {
+        if (emadspassword.getText().toString().equals(emadsrepassword.getText().toString()) && !emadsemail.getText().toString().isEmpty() && !emadsusername.getText().toString().isEmpty()  && CheckConnectivity) {
             User user = new User(emadsusername.getText().toString(), emadsemail.getText().toString(), emadspassword.getText().toString());
-
+            UserName = emadsusername.getText().toString();
             dbhandler.setUserData(emadsusername.getText().toString(), emadsemail.getText().toString(), emadspassword.getText().toString());
             //android.util.Log("UserCreatedError","Iss function mein hoon mein");
             //android.widget.Toast.makeText(getBaseContext(), "User Stored in Db", android.widget.Toast.LENGTH_LONG).show();
@@ -76,11 +81,48 @@ public class SignupActivity extends AppCompatActivity {
         finish();
     }
 
+
+
     public void WelcomePage()
     {
-        Intent intent = new Intent(this, WelcomeMenu.class);
-        startActivity(intent);
-        finish();
+        boolean CheckConnectivity = UserConnectedtoInternetOrNot();
+
+        if (CheckConnectivity == true)
+        {
+
+            Intent intent = new Intent(this, WelcomeMenu.class);
+            intent.putExtra("User",UserName);
+            startActivity(intent);
+            finish();
+        }
+        else
+        {
+            android.widget.Toast.makeText(getBaseContext(), "Check Internet Connection and retry", android.widget.Toast.LENGTH_LONG).show();
+        }
+
     }
+
+    public boolean UserConnectedtoInternetOrNot()
+    {
+        ConnectivityManager connec = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connec != null && (
+                (connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) ||
+                        (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED))) {
+
+            //You are connected, do something online.
+            return true;
+        } else if (connec != null && (
+                (connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.DISCONNECTED) ||
+                        (connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.DISCONNECTED ))) {
+
+            //Not connected.
+            android.widget.Toast.makeText(getBaseContext(), "No Internet Connection! Check Connection!", android.widget.Toast.LENGTH_LONG).show();
+            return false;
+
+        }
+        return false;
+    }
+
 
 }

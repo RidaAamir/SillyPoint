@@ -99,7 +99,7 @@ public class WelcomeMenu extends ActionBarActivity
     int counter = 0;
     ArrayList<String> Teams = new ArrayList<>();//creating new generic arraylist
     ArrayList<String> TeamId = new ArrayList<>();//creating new generic arraylist
-
+    String UserName = "";
 
    /* @BindView(R.id.button) android.support.v7.widget.AppCompatButton _Button;
     @BindView(R.id.button2) android.support.v7.widget.AppCompatButton _Button1;
@@ -130,10 +130,14 @@ public class WelcomeMenu extends ActionBarActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Intent intent = getIntent();
+
+        UserName = getIntent().getStringExtra("User");
+
         ButterKnife.bind(this);
 
         android.widget.LinearLayout b = (android.widget.LinearLayout) findViewById(R.id.Linear);
-        new JSONTask().execute("http://cricapi.com/api/cricket");
+        new JSONTask().execute("http://cricapi.com/api/cricket?&apikey=AA56WBu4FyX74UjdhWWbCmeXwrn2");
 
     }
 
@@ -191,22 +195,29 @@ public class WelcomeMenu extends ActionBarActivity
                 obj = new JSONObject(s);
                 final JSONArray geodata = obj.getJSONArray("data");
                 final int n = geodata.length();
+                Teams.add("Sydney Thunder v Brisbane Heat ");
+                TeamId.add("1023595");
                 for (int i = 0; i < n; ++i) {
                     final JSONObject person = geodata.getJSONObject(i);
                     System.out.println(person.getString("title"));
 
-                    if (person.getString("title").contains("Pakistan") || person.getString("title").contains("England") || person.getString("title").contains("Australia") || person.getString("title").contains("South Africa") || person.getString("title").contains("New Zealand") || person.getString("title").contains("India") || person.getString("title").contains("Sri Lanka") || person.getString("title").contains("Bangladesh") || person.getString("title").contains("West Indies") || person.getString("title").contains("Afghanistan"))
+
+                    Teams.add(person.getString("title"));
+                    TeamId.add(person.getString("unique_id"));
+                    /*if (person.getString("title").contains("Pakistan") || person.getString("title").contains("England") || person.getString("title").contains("Australia") || person.getString("title").contains("South Africa") || person.getString("title").contains("New Zealand") || person.getString("title").contains("India") || person.getString("title").contains("Sri Lanka") || person.getString("title").contains("Bangladesh") || person.getString("title").contains("West Indies") || person.getString("title").contains("Afghanistan"))
                     {
                         Teams.add(person.getString("title"));
                         TeamId.add(person.getString("unique_id"));
-                    }
+
+                    }*/
 
                     //output.append(person.getString("title") + "\n");
                 }
+                //Teams.add("Pak V Win");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+           //s Teams.add("Pakistan V West Indies");
             String[] data = new String[Teams.size()];
             for (int i = 0;i< Teams.size();i++)
             {
@@ -220,7 +231,7 @@ public class WelcomeMenu extends ActionBarActivity
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                    // android.widget.Toast.makeText(getBaseContext(), "Item Clicked!", android.widget.Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(WelcomeMenu.this,TeamPlayers.class);
+                    Intent intent = new Intent(WelcomeMenu.this,SelectTeam.class); //TeamPlayers.java
                     //android.support.v7.widget.AppCompatButton b = (android.support.v7.widget.AppCompatButton)findViewById(R.id.button);
 
 
@@ -234,7 +245,7 @@ public class WelcomeMenu extends ActionBarActivity
                             id2 = TeamId.get(i).toString();
                         }
                     }
-
+                    intent.putExtra("User",UserName);
                     intent.putExtra("Teams", Text);
                     intent.putExtra("Tid",id2);
                     startActivity(intent);
@@ -276,6 +287,12 @@ public class WelcomeMenu extends ActionBarActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.Logout) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -289,6 +306,9 @@ public class WelcomeMenu extends ActionBarActivity
         if (id == R.id.Leaderboard) {
             // Handle the Leaderboard action
         } else if (id == R.id.TeamId) {
+            Intent intent = new Intent(this,ViewTeam.class);
+            startActivity(intent);
+            finish();
 
         } else if (id == R.id.TeamUpdate) {
 

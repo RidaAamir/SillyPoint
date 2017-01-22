@@ -35,7 +35,10 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".Team" />
         <activity android:name=".MyFormation" />
-        <activity android:name=".TeamPlayers"></activity>
+        <activity android:name=".TeamPlayers" />
+        <activity android:name=".SelectTeam" />
+        <activity android:name=".DisplayTeam" />
+        <activity android:name=".ViewTeam"></activity>
     </application>
 
 </manifest>

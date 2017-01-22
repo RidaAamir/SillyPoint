@@ -10,7 +10,7 @@
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
     android:weightSum="1"
-    android:background="@drawable/crowd">
+    android:background="@drawable/sptry">
 
     <ImageView
         android:src="@drawable/sp4"
@@ -72,6 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginRight="65dp"
+        android:drawableLeft="@drawable/user1"
         android:padding="12dp"
         android:text="Create Account"
         android:background="@color/colorPrimary"
