@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ai_or_select_team"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ai_decide"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    tools:context="com.example.emad.splashscreen.AI_or_selectTeam">
+
+
+    <TextView
+        android:text="Check Out the AI team"
+        android:textAppearance="@style/CodeFont"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="100dp"
+        android:id="@+id/textView3"
+        android:clickable="true"
+        android:onClick="AI_team"/>
+
+    <TextView
+        android:text="Proceed To Create Team"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:textAppearance="@style/CodeFont"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="146dp"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="select_team"/>
+
+
+</RelativeLayout>

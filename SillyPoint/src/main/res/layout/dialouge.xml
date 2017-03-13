@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+
+    android:background="@color/darkgreen"
+
+    >
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
+            android:text="You have Selected your 11 players,\n Now Click to Submit! "
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/caption"/>
+        <Button
+            android:id="@+id/save"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/caption"
+            android:gravity="center"
+            android:layout_marginLeft="127dp"
+            android:text="Submit"
+            android:onClick="userCreated"/>
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/save"
+            android:onClick="goback"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginLeft="127dp"
+            android:text="Cancel" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
